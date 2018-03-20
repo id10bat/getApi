@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script src="/javascripts/script.js"></script>
+
+
+    <title>Product Register Form</title>
+</head>
+
+<body>
+    <h1>เพิ่มสินค้าเข้าสู่ฐานข้อมูล</h1>
+
+
+    <form action="http://150.95.26.138:3000/apis/products" method="POST" class="myForm">
+        <label for="productBarcode">รหัส Barcode:</label>
+        <input type="text" name="productBarcode" id="productBarcode" placeholder="123456789" required>
+        <span style="color:red">*</span>
+        <br>
+        <br>
+
+        <label for="productName">ชื่อสินค้า:</label>
+        <input type="text" name="productName" id="productName" placeholder="ลูกอมฮอลล์ผสมนํ้าผึ้ง" required>
+        <span style="color:red">*</span>
+        <br>
+        <br>
+
+        <label for="productBrand">แบรนด์ / ยี่ห้อ:</label>
+        <input type="text" name="productBrand" id="productBrand" placeholder="Puton" required>
+        <span style="color:red">*</span>
+        <br>
+        <br>
+
+        <label for="productManufacturer">โรงงานที่ผลิต:</label>
+        <input type="text" name="productManufacturer" id="productManufacturer" placeholder="Puton Company">
+        <br>
+        <br>
+
+        <label for="productSize">ขนาดสินค้า:</label>
+        <input type="text" name="productSize" id="productSize" placeholder="S">
+        <br>
+        <br>
+
+        <button type="submit">ส่ง</button>
+    </form>
+
+
+</body>
+
+</html>

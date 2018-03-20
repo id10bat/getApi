@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tung Ton</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #myInputSearchData {
+            background-image: url('/css/searchicon.png');
+            background-position: 10px 12px;
+            background-repeat: no-repeat;
+            width: 50%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        hth {
+            font-weight: bold;
+            text-align: -internal-center;
+        }
+
+        user agent stylesheet td,
+        hth {
+            display: table-cell;
+            vertical-align: inherit;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        htr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+            background-color: #1d1c1c;
+            color: white;
+        }
+
+        hth,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        htr:nth-child(even) {
+            background-color: #616060;
+        }
+
+        .t0-input {
+            padding: 8px;
+            display: block;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="size-form">
+            <div class="produc-example">
+                <div id="detailProduct">
+                    Product Bar Code:
+                    <input type="text" placeholder="add" class="t0-input" id="pBarCode">
+                    <br> Product Name:
+                    <input type="text" placeholder="add" class="t0-input" id="pName">
+                    <br> Product Brand:
+                    <input type="text" placeholder="add" class="t0-input" id="pBrand">
+                    <br> Product Manufacturer:
+                    <input type="text" placeholder="add" class="t0-input" id="pManufacturer">
+                    <br> Product Size:
+                    <input type="text" placeholder="add" class="t0-input" id="pSize">
+                    <br>Product Status:
+                    <input type="text" placeholder="add" class="t0-input" id="pStatus">
+                    <br>
+                    <button id="addProduct" onclick="finishAddProduct()">เพิ่มสินค้า</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="size-form">
+            <div class="search-example">
+                <div>
+                    <input type="text" id="myInputSearchData" onkeyup="searchData()" placeholder="Search Product Bar Code.." title="Type in a name">
+                    <div class="table-example">
+                        <table id="item">
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

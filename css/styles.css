@@ -1,0 +1,68 @@
+.produc-example {
+    position: relative;
+    padding: 3em 1em 1em;
+    border: 1px solid #d8d8d8;
+    margin: 1.5rem 0 0;
+}
+
+.produc-example::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 1em;
+    color: #aaa;
+    font-size: 10;
+    font-weight: 1000;
+    content: 'รายละเอียดสินค้า';
+}
+
+
+.table-example {
+    position: relative;
+    padding: 1em 1em 1em;
+    border: 1px solid #d8d8d8;
+    margin: 1.5rem 0 0;
+}
+
+.search-example {
+    position: relative;
+    padding: 3em 1em 1em;
+    border: 1px solid #d8d8d8;
+    margin: 1.5rem 0 0;
+}
+
+.search-example::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 1em;
+    color: #aaa;
+    font-size: 10;
+    font-weight: 1000;
+    content: 'สินค้า';
+}
+
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+
+.size-form {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 75%;
+    flex: 0 0 75%;
+    /* max-width: 75%; */
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container {
+    max-width: 960px;
+}
