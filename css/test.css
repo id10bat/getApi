@@ -1,71 +1,5 @@
-.produc-example {
-    position: relative;
-    padding: 3em 1em 1em;
-    border: 1px solid #d8d8d8;
-    margin: 1.5rem 0 0;
-}
 
-.produc-example::before {
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding: 1em;
-    color: #aaa;
-    font-size: 10;
-    font-weight: 1000;
-    content: 'รายละเอียดสินค้า';
-}
-
-
-.table-example {
-    position: relative;
-    padding: 1em 1em 1em;
-    border: 1px solid #d8d8d8;
-    margin: 1.5rem 0 0;
-}
-
-.search-example {
-    position: relative;
-    padding: 3em 1em 1em;
-    border: 1px solid #d8d8d8;
-    margin: 1.5rem 0 0;
-}
-
-.search-example::before {
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding: 1em;
-    color: #aaa;
-    font-size: 10;
-    font-weight: 1000;
-    content: 'สินค้า';
-}
-
-
-*, :after, :before {
-    box-sizing: border-box;
-}
-
-
-.size-form {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 75%;
-    flex: 0 0 75%;
-    /* max-width: 75%; */
-}
-
-.container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.container {
-    max-width: 960px;
-}
+body {font-family: Arial, Helvetica, sans-serif;}
 
 .input-container {
     position: relative;
@@ -133,41 +67,6 @@ button:hover {
     background-color: #006d31;
 }
 
-#deleteProduct {
-    padding: 5px 5px;
-    width: 30%;
-    float: right;
-    background-color: #6d1900;
-}
-
-#editProduct {
-    padding: 5px 5px;
-    width: 40%;
-    float: left;
-    background-color: #006d31;
-}
-
-#yesbtn{
-    padding: 16px 18px;
-    width: 40%;
-    float: right;
-    background-color: #6d1900;
-}
-
-#nobtn{
-    padding: 13px 0px;
-    width: 40%;
-    float: left;
-    background-color: #006d31;
-}
-
-#addProduct {
-    margin: 0;;
-    padding: 16px 18px;
-    width: 25%;
-    float: right;
-    background-color: #006d09;
-}
 /* Center the image and position the close button */
 
 
@@ -203,8 +102,8 @@ button:hover {
 /* The Close Button (x) */
 .close {
     position: absolute;
-    right: 130px;
-    /* top: 0; */
+    right: 25px;
+    top: 0;
     color: #000;
     font-size: 35px;
     font-weight: bold;
@@ -241,12 +140,4 @@ button:hover {
     .cancelbtn {
        width: 100%;
     }
-}
-
-.btn-group, .btn-group-vertical {
-    position: relative;
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    vertical-align: middle;
 }

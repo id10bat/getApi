@@ -20,142 +20,178 @@ function searchData() {
 
 
 
-    const getApi = new XMLHttpRequest();
-    getApi.open("GET", "http://150.95.26.138:3000/apis/products", true);
-    getApi.send(null);
+const getApi = new XMLHttpRequest();
+getApi.open("GET", "http://150.95.26.138:3000/apis/products", true);
+getApi.send(null);
 
-    const data = JSON.stringify(getApi.response)
-    // getApi.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+const data = JSON.stringify(getApi.response)
+// getApi.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+// console.log(getApi.response);
 
-    getApi.onload = function () {
+getApi.onload = function () {
 
-        let getData = JSON.parse(getApi.response);
-        if (getApi.readyState == 4 && getApi.status == "200") {
-            console.log(getData);
-            let table = []
-            let item;
-            let productId, productBarcode, productName, productBrand, productManufacturer;
-            for (let i = 0; i <= getData.products.length; i++) {
-                for (const prop in getData.products[i]) {
-                    switch (prop) {
-                        case "productId":
-                            productId = getData.products[i][prop];
-                            break;
-                        case "productBarcode":
-                            productBarcode = getData.products[i][prop];
-                            break;
-                        case "productName":
-                            productName = getData.products[i][prop];
-                            break;
-                        case "productBrand":
-                            productBrand = getData.products[i][prop];
-                            break;
-                    }
-
-                }
-                table.push({ html: item })
-                item = `<tr><th>${productId}</th><th>${productBarcode}</th><th>${productName}</th><th>${productBrand}</th><th><button onclick="checkData(${productId})">check</button></th></tr>`;
-
-                // console.log(getData.products);
-                // console.log(table);
-
-
-
-            }
-
-            let tableDataHead = ""
-            let tableData = ""
-            for (let i = 0; i < table.length; i++) {
-                // console.log(table[i].html);
-
-                if (table[i].html == undefined) {
-                    tableDataHead = "<htr><hth>ลำดับ</hth><hth>รหัส</hth><hth>ชื่อ</hth><hth>แบรนด์/ ยื่ห้อ</hth><hth>รายละเอียด</hth></htr>";
-
-                } else {
-                    tableDataHead = "<htr><hth>ลำดับ</hth><hth>รหัส</hth><hth>ชื่อ</hth><hth>แบรนด์/ ยื่ห้อ</hth><hth>รายละเอียด</hth></htr>";
-                    tableData += table[i].html
+    let getData = JSON.parse(getApi.response);
+    if (getApi.readyState == 4 && getApi.status == "200") {
+        console.log(getData);
+        let table = []
+        let item, arrayCheck;
+        let productId, productBarcode, productName, productBrand, productManufacturer;
+        for (var i = 0; i <= getData.products.length; i++) {
+            for (const prop in getData.products[i]) {
+                switch (prop) {
+                    case "productId":
+                        productId = getData.products[i][prop];
+                        arrayCheck = i
+                        break;
+                    case "productBarcode":
+                        productBarcode = getData.products[i][prop];
+                        break;
+                    case "productName":
+                        productName = getData.products[i][prop];
+                        break;
+                    case "productBrand":
+                        productBrand = getData.products[i][prop];
+                        break;
                 }
 
             }
+            table.push({ html: item })
+            item = `<tr><th>${productId}</th><th>${productBarcode}</th><th>${productName}</th><th>${productBrand}</th><th><div class="btn-group"><button id="editProduct" onclick="checkData(${arrayCheck})">แก้ไข</button> <button  id="deleteProduct" onclick="deleteProduct(${arrayCheck})">ลบ</button></div></th></tr>`;
 
-            document.getElementById("item").innerHTML = tableDataHead + tableData;
+            // console.log(getData.products);
+            // console.log(table);
 
 
-        } else {
-            console.error(getData);
+
         }
 
+        let tableDataHead = ""
+        let tableData = ""
+        for (let i = 0; i < table.length; i++) {
+            // console.log(table[i].html);
 
+            if (table[i].html == undefined) {
+                tableDataHead = "<htr><hth>ลำดับ</hth><hth>รหัส</hth><hth>ชื่อ</hth><hth>แบรนด์/ ยื่ห้อ</hth><hth>รายละเอียด</hth></htr>";
+
+            } else {
+                tableDataHead = "<htr><hth>ลำดับ</hth><hth>รหัส</hth><hth>ชื่อ</hth><hth>แบรนด์/ ยื่ห้อ</hth><hth>รายละเอียด</hth></htr>";
+                tableData += table[i].html
+            }
+
+        }
+
+        document.getElementById("item").innerHTML = tableDataHead + tableData;
+
+
+    } else {
+        console.error(getData);
     }
+
+
+}
 
 let detailProduct = ""
 function checkData(funcProduct) {
 
 
-    let funcProductContro = funcProduct - 1;
+    let funcProductContro = funcProduct;
     console.log(funcProductContro);
 
     const getApiToDetailProduct = new XMLHttpRequest();
     getApiToDetailProduct.open("GET", "http://150.95.26.138:3000/apis/products", true);
     getApiToDetailProduct.send(null);
+
     getApiToDetailProduct.onload = function () {
 
-        let getData2 = JSON.parse(getApiToDetailProduct.response);
+        let getData = JSON.parse(getApiToDetailProduct.response);
         if (getApiToDetailProduct.readyState == 4 && getApiToDetailProduct.status == "200") {
             let detailProductId, detailProductBarcode, detailProductName, detailProductBrand, detailProductManufacturer,
                 detailProductSize, detailProductStatus;
             if (funcProductContro == funcProductContro) {
 
-                for (const prop in getData2.products[funcProductContro]) {
+                for (const prop in getData.products[funcProductContro]) {
                     switch (prop) {
                         case "productId":
-                            detailProductId = getData2.products[funcProductContro][prop];
+                            detailProductId = getData.products[funcProductContro][prop];
                             break;
                         case "productBarcode":
-                            detailProductBarcode = getData2.products[funcProductContro][prop];
+                            detailProductBarcode = getData.products[funcProductContro][prop];
                             break;
                         case "productName":
-                            detailProductName = getData2.products[funcProductContro][prop];
+                            detailProductName = getData.products[funcProductContro][prop];
                             break;
                         case "productBrand":
-                            detailProductBrand = getData2.products[funcProductContro][prop];
+                            detailProductBrand = getData.products[funcProductContro][prop];
                             break;
                         case "productManufacturer":
-                            detailProductManufacturer = getData2.products[funcProductContro][prop];
+                            detailProductManufacturer = getData.products[funcProductContro][prop];
                             break;
                         case "productSize":
-                            detailProductSize = getData2.products[funcProductContro][prop];
+                            detailProductSize = getData.products[funcProductContro][prop];
                             break;
                         case "productStatus":
-                            detailProductStatus = getData2.products[funcProductContro][prop];
+                            detailProductStatus = getData.products[funcProductContro][prop];
                             break;
                     }
 
                 }
 
-                detailProduct = `Product Bar Code:
-        <input type="text" placeholder="add" name="editData" id="pBarCode"  class="t0-input" value="${detailProductBarcode}" disabled >
-        <br> Product Name:
-        <input type="text" placeholder="add" name="editData" id="pName"  class="t0-input" value="${detailProductName}" disabled >
-        <br> Product Brand:
-        <input type="text" placeholder="add" name="editData" id="pBrand"  class="t0-input" value="${detailProductBrand}" disabled >
-        <br> Product Manufacturer:
-        <input type="text" placeholder="add" name="editData" id="pManufacturer"  class="t0-input" value="${detailProductManufacturer}" disabled >
-        <br> Product Size:
-        <input type="text" placeholder="add" name="editData" id="pSize"  class="t0-input" value="${detailProductSize}" disabled >
-        <br>Product Status:
-        <input type="text" placeholder="add" name="editData" id="pStatus"  class="t0-input" value="${detailProductStatus}" disabled >
-        <br>
-        <button id="addProduct" onclick="addProduct(${detailProductId})">เพิ่มสินค้า</button>
-        <button id="editData" onclick="editData(${detailProductId})">แก้ไขสินค้า</button>
-        <button id="deleteProduct" onclick="deleteProduct(${detailProductId})">ลบสินค้า</button>`;
-                console.log(getData2.products[funcProductContro]);
+                detailProduct = `<div id="addProductForm" class="modal">
+
+                <form class="modal-content animate">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('addProductForm').style.display='none'" class="close" title="Close Modal">&times;</span>
+            
+                    </div>
+            
+                    <div class="container-modle">
+                        <div class="input-container">
+                            <input value="${detailProductBarcode}" type="#{label}" id="pBarCode" required="required" class="t0-input" id="pBarCode">
+                            <label for="#{label}">Product Bar Code:</label>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="input-container">
+                            <input value="${detailProductName}" type="#{label}" id="pName" required="required" class="t0-input" id="pName">
+                            <label for="#{label}">Product Name:</label>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="input-container">
+                            <input value="${detailProductBrand}" type="#{label}" id="pBrand" required="required" class="t0-input" id="pBrand">
+                            <label for="#{label}">Product Brand:</label>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="input-container">
+                            <input value="${detailProductManufacturer}" type="#{label}" id="pManufacturer" required="required" class="t0-input" id="pManufacturer">
+                            <label for="#{label}">Product Manufacturer:</label>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="input-container">
+                            <input value="${detailProductSize}" type="#{label}" id="pSize" required="required" class="t0-input" id="pSize">
+                            <label for="#{label}">Product Size:</label>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="input-container">
+                            <input value="${detailProductStatus}" type="#{label}" id="pStatus" required="required" class="t0-input" id="pSize">
+                            <label for="#{label}">Product Status:</label>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+            
+                    <div class="container-modle" style="background-color:#f1f1f1">
+                        <button type="button" onclick="finishEditData(${funcProductContro})" class="finishbtn">Finish</button>
+            
+                    </div>
+                </form>
+            </div>`;
+                console.log(getData.products[funcProductContro]);
             }
             document.getElementById("detailProduct").innerHTML = detailProduct;
 
         }
     }
 }
+
+
 
 function editData(funcContro) {
     $("input[name='editData']").removeAttr("disabled");
@@ -164,6 +200,8 @@ function editData(funcContro) {
     console.log(funcContro);
 
 }
+
+
 
 function finishEditData(funcContros) {
     $("input[name='editData']").attr('disabled', true)
@@ -178,78 +216,156 @@ function finishEditData(funcContros) {
     const pStatus = document.getElementById("pStatus").value;
 
 
+    const getApiFinishEditData = new XMLHttpRequest();
+    getApiFinishEditData.open("GET", "http://150.95.26.138:3000/apis/products", true);
+    getApiFinishEditData.send(null);
 
+    getApiFinishEditData.onload = function () {
 
-    let updateData = {};
-    updateData.products = [{
-        "productId": funcContros, "productBarcode": pBarCode
-        , "productName": pName, "productBrand": pBrand, "productManufacturer": pManufacturer
-        , "productSize": pSize, "productStatus": pStatus
-    }]
+        let getData = JSON.parse(getApiFinishEditData.response);
+        if (getApiFinishEditData.readyState == 4 && getApiFinishEditData.status == "200") {
+            var productId, productBarcode, productName, productBrand, productManufacturer,
+                productSize, productStatus;
+            if (funcContros == funcContros) {
 
-    let json = JSON.stringify(updateData);
+                for (const prop in getData.products[funcContros]) {
+                    switch (prop) {
+                        case "productId":
+                            productId = getData.products[funcContros][prop];
+                            break;
+                        case "productBarcode":
+                            productBarcode = getData.products[funcContros][prop];
+                            break;
+                        case "productName":
+                            productName = getData.products[funcContros][prop];
+                            break;
+                        case "productBrand":
+                            productBrand = getData.products[funcContros][prop];
+                            break;
+                        case "productManufacturer":
+                            productManufacturer = getData.products[funcContros][prop];
+                            break;
+                        case "productSize":
+                            productSize = getData.products[funcContros][prop];
+                            break;
+                        case "productStatus":
+                            productStatus = getData.products[funcContros][prop];
+                            break;
+                    }
 
-    let putApi = new XMLHttpRequest();
-    putApi.open("PUT", "http://150.95.26.138:3000/apis/products", true);
-    putApi.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    putApi.onload = function () {
-        // let users = JSON.parse(putApi.responseText);
-        if (putApi.readyState == 4 && putApi.status == "200") {
-            // users.push(updateData)
-            console.log(users);
-        } else {
-            console.error(users);
+                }
+            }
         }
-    }
-    putApi.send()
-    console.log("b:" + json);
-    console.log(putApi);
 
+
+        let product = {
+            "productBarcode": pBarCode
+            , "productName": pName, "productBrand": pBrand, "productManufacturer": pManufacturer
+            , "productSize": pSize, "productStatus": pStatus
+        };
+
+
+        let json = JSON.stringify(product);
+
+        let putApi = new XMLHttpRequest();
+        putApi.open("PUT", ` http://150.95.26.138:3000/apis/products/${productBarcode}`, true);
+        putApi.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        putApi.onload = function () {
+            let users = JSON.parse(putApi.responseText);
+            if (putApi.readyState == 4 && putApi.status == "200") {
+                document.getElementById('addProductForm').style.display = 'none';
+                const pupUp = `<div id="finishbtn" class="modal">
+                <div class="container-modle modal-content animate" >
+                <div style="background-color:#fff">
+                <center><h1>แก้ไขเสร็จสิ้น</h1></center>
+                </div>
+                <div class="container-modle" style="background-color:#f1f1f1">
+                <button onclick="document.getElementById('finishbtn').style.display='none'">ตกลง</button>
+                </div>
+                </div>
+                </div>`
+                document.getElementById("detailProduct").innerHTML = pupUp;
+                console.log(users);
+            } else {
+                console.error(users);
+            }
+        }
+        putApi.send(json)
+        // console.log("b:" + json);
+        // console.log(putApi);
+    }
 
 }
+
+
 // console.log(data.products);
 // console.log(data.products[0]);
 
 // console.log(data);
 
 function addProduct(funcControsAdd) {
-    // $("#addProduct").text('เสร็จสิ้น').removeAttr('onclick')
-    // $("#addProduct").attr('onclick', `finishAddProduct(${funcControsAdd})`)
     console.log(funcControsAdd);
 
-    let addProduct = ` Product Bar Code:
-    <input type="text" placeholder="add" class="t0-input">
-    <br> Product Name:
-    <input type="text" placeholder="add" class="t0-input">
-    <br> Product Brand:
-    <input type="text" placeholder="add" class="t0-input">
-    <br> Product Manufacturer:
-    <input type="text" placeholder="add" class="t0-input">
-    <br> Product Size:
-    <input type="text" placeholder="add" class="t0-input">
-    <br>Product Status:
-    <input type="text" placeholder="add" class="t0-input">
-    <br>
-    <button id="addProduct" finishAddProduct()>เสร็จสิ้น</button>`;
+    let addProduct = ` <div id="addProductForm" class="modal">
+
+    <form class="modal-content animate"  >
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('addProductForm').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+        </div>
+
+        <div class="container-modle">
+            <div class="input-container">
+                <input type="#{label}" name="productBarcode" id="productBarcode" required="required" class="t0-input" id="pBarCode">
+                <label for="#{label}">Product Bar Code:</label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="#{label}" name="productName" id="productName" required="required" class="t0-input" id="pName">
+                <label for="#{label}">Product Name:</label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="#{label}" name="productBrand" id="productBrand" required="required" class="t0-input" id="pBrand">
+                <label for="#{label}">Product Brand:</label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="#{label}" name="productManufacturer" id="productManufacturer" required="required" class="t0-input" id="pManufacturer">
+                <label for="#{label}">Product Manufacturer:</label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="#{label}" name="productSize" id="productSize" required="required" class="t0-input" id="pSize">
+                <label for="#{label}">Product Size:</label>
+                <div class="bar"></div>
+            </div>
+        </div>
+
+        <div class="container-modle" style="background-color:#f1f1f1">
+            <button type="button" onclick="finishAddProduct()" class="finishbtn">Finish</button>
+
+        </div>
+    </form>
+</div>`;
     document.getElementById("detailProduct").innerHTML = addProduct;
 }
 
 function finishAddProduct() {
-    const pBarCode = document.getElementById("pBarCode").value;
-    const pName = document.getElementById("pName").value;
-    const pBrand = document.getElementById("pBrand").value;
-    const pManufacturer = document.getElementById("pManufacturer").value;
-    const pSize = document.getElementById("pSize").value;
-    const pStatus = document.getElementById("pStatus").value;
+    const pBarCode = document.getElementById("productBarcode").value;
+    const pName = document.getElementById("productName").value;
+    const pBrand = document.getElementById("productBrand").value;
+    const pManufacturer = document.getElementById("productManufacturer").value;
+    const pSize = document.getElementById("productSize").value;
 
-    let addData = {};
-    addData.products = [{
-        "productId": null, "productBarcode": pBarCode
-        , "productName": pName, "productBrand": pBrand, "productManufacturer": pManufacturer
-        , "productSize": pSize, "productStatus": pStatus
-    }]
+    let addProduct = {
+        productBarcode: pBarCode
+        , productName: pName, productBrand: pBrand, productManufacturer: pManufacturer
+        , productSize: pSize, productStatus: "1"
+    };
 
-    let json = JSON.stringify(addData);
+
+    let jsons = JSON.stringify(addProduct);
 
     let postApi = new XMLHttpRequest();
     postApi.open("POST", "http://150.95.26.138:3000/apis/products", true);
@@ -257,34 +373,157 @@ function finishAddProduct() {
     postApi.onload = function () {
         let users = JSON.parse(postApi.responseText);
         if (postApi.readyState == 4 && postApi.status == "200") {
-            // users.push(addData)
+            document.getElementById('addProductForm').style.display='none';
+            const pupUp = `<div id="finishbtn" class="modal">
+                <div class="container-modle modal-content animate" >
+                <div style="background-color:#fff">
+                <center><h1>เพิ่มเสร็จสิ้น</h1></center>
+                </div>
+                <div class="container-modle" style="background-color:#f1f1f1">
+                <button onclick="document.getElementById('finishbtn').style.display='none'">ตกลง</button>
+                </div>
+                </div>
+                </div>`
+                document.getElementById("detailProduct").innerHTML = pupUp;
+
             console.log(users);
         } else {
             console.error(users);
         }
     }
-    postApi.send(json)
-    console.log("b:" + json);
-    console.log(postApi);
-    console.log(addData);
+    postApi.send(jsons)
+    console.log("b:" + jsons);
+    // console.log(postApi);
+    // console.log(getData);
 
 }
 
-function deleteProduct(funcControDelete) {
-    
-    let deleteApi = new XMLHttpRequest();
-    deleteApi.open("DELETE", "http://150.95.26.138:3000/apis/products", true);
-    deleteApi.onload = function () {
-        let deleteUsers = JSON.parse(deleteApi.responseText);
-        if (deleteApi.readyState == 4 && deleteApi.status == "200") {
-            console.log(deleteUsers);
-        } else {
-            console.error(deleteUsers);
-        }
-        
-    }
-    
-console.log(deleteApi);
 
-    // deleteApi.send(null);
+// }
+
+function deleteProduct(funcControDelete) {
+
+    const getApiDeleteProduct = new XMLHttpRequest();
+    getApiDeleteProduct.open("GET", "http://150.95.26.138:3000/apis/products", true);
+    getApiDeleteProduct.send(null);
+
+    getApiDeleteProduct.onload = function () {
+
+        let getData = JSON.parse(getApiDeleteProduct.response);
+        if (getApiDeleteProduct.readyState == 4 && getApiDeleteProduct.status == "200") {
+            var productId, productBarcode, productName, productBrand, productManufacturer,
+                productSize, productStatus;
+            if (funcControDelete == funcControDelete) {
+
+                for (const prop in getData.products[funcControDelete]) {
+                    switch (prop) {
+                        case "productId":
+                            productId = getData.products[funcControDelete][prop];
+                            break;
+                        case "productBarcode":
+                            productBarcode = getData.products[funcControDelete][prop];
+                            break;
+                        case "productName":
+                            productName = getData.products[funcControDelete][prop];
+                            break;
+                        case "productBrand":
+                            productBrand = getData.products[funcControDelete][prop];
+                            break;
+                        case "productManufacturer":
+                            productManufacturer = getData.products[funcControDelete][prop];
+                            break;
+                        case "productSize":
+                            productSize = getData.products[funcControDelete][prop];
+                            break;
+                        case "productStatus":
+                            productStatus = getData.products[funcControDelete][prop];
+                            break;
+                    }
+
+                }
+            }
+        }
+
+        const pupUpDeelete = `
+                <div id="finishbtn" class="modal">
+                 <div class="container-modle modal-content animate" >
+                  <div style="background-color:#fff">
+                   <center><h1 style="color: #b50202;" >คุณแน่ใจว่าจะลบข้อมูลนี้ ใช่หรือไม่</h1></center>
+                  
+                  <div class="container-modle" style="background-color:#f1f1f1">
+                   <button id="yesbtn" onclick="deletData(${funcControDelete})">ใช่</button>
+                   <button id="nobtn" onclick="notDeletData(${funcControDelete})">ไม่</button>
+                   </div>
+                </div>
+                 </div>
+                </div>`
+        document.getElementById("detailProduct").innerHTML = pupUpDeelete;
+
+
+    }
+}
+
+function deletData(deleteNum) {
+    const getApiDeleteProduct = new XMLHttpRequest();
+    getApiDeleteProduct.open("GET", "http://150.95.26.138:3000/apis/products", true);
+    getApiDeleteProduct.send(null);
+
+    getApiDeleteProduct.onload = function () {
+
+        let getData = JSON.parse(getApiDeleteProduct.response);
+        if (getApiDeleteProduct.readyState == 4 && getApiDeleteProduct.status == "200") {
+            var productIdDelete, productBarcodeDelete, productNameDelete,
+                productBrandDelete, productManufacturerDelete, productSizeDelete,
+                productStatusDelete;
+            if (deleteNum == deleteNum) {
+
+                for (const prop in getData.products[deleteNum]) {
+                    switch (prop) {
+                        case "productId":
+                            productIdDelete = getData.products[deleteNum][prop];
+                            break;
+                        case "productBarcode":
+                            productBarcodeDelete = getData.products[deleteNum][prop];
+                            break;
+                        case "productName":
+                            productNameDelete = getData.products[deleteNum][prop];
+                            break;
+                        case "productBrand":
+                            productBrandDelete = getData.products[deleteNum][prop];
+                            break;
+                        case "productManufacturer":
+                            productManufacturerDelete = getData.products[deleteNum][prop];
+                            break;
+                        case "productSize":
+                            productSizeDelete = getData.products[deleteNum][prop];
+                            break;
+                        case "productStatus":
+                            productStatusDelete = getData.products[deleteNum][prop];
+                            break;
+                    }
+
+                }
+            }
+        }
+
+        let deleteApi = new XMLHttpRequest();
+        deleteApi.open("DELETE", `http://150.95.26.138:3000/apis/products/${productBarcodeDelete}`, true);
+        deleteApi.onload = function () {
+            let deleteUsers = JSON.parse(deleteApi.responseText);
+            if (deleteApi.readyState == 4 && deleteApi.status == "200") {
+                console.log(deleteUsers);
+            } else {
+                console.error(deleteUsers);
+            }
+
+        }
+        document.getElementById('finishbtn').style.display = 'none'
+        deleteApi.send(null);
+    }
+
+
+}
+
+function notDeletData(notDeleteNum) {
+    document.getElementById('finishbtn').style.display = 'none'
 }

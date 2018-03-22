@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tung Ton</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -77,41 +78,22 @@
         }
     </style>
     <link rel="stylesheet" href="css/styles.css">
+   
 </head>
 
 <body>
-    <div class="container">
-        <div class="size-form">
-            <div class="produc-example">
-                <div id="detailProduct">
-                    Product Bar Code:
-                    <input type="text" placeholder="add" class="t0-input" id="pBarCode">
-                    <br> Product Name:
-                    <input type="text" placeholder="add" class="t0-input" id="pName">
-                    <br> Product Brand:
-                    <input type="text" placeholder="add" class="t0-input" id="pBrand">
-                    <br> Product Manufacturer:
-                    <input type="text" placeholder="add" class="t0-input" id="pManufacturer">
-                    <br> Product Size:
-                    <input type="text" placeholder="add" class="t0-input" id="pSize">
-                    <br>Product Status:
-                    <input type="text" placeholder="add" class="t0-input" id="pStatus">
-                    <br>
-                    <button id="addProduct" onclick="finishAddProduct()">เพิ่มสินค้า</button>
-                </div>
-            </div>
-        </div>
+
+    <div id="detailProduct">
     </div>
     <div class="container">
         <div class="size-form">
             <div class="search-example">
                 <div>
                     <input type="text" id="myInputSearchData" onkeyup="searchData()" placeholder="Search Product Bar Code.." title="Type in a name">
+                    <button id="addProduct" onclick="addProduct()">เพิ่มสินค้า</button>
                     <div class="table-example">
                         <table id="item">
-
                         </table>
-
                     </div>
                 </div>
             </div>
