@@ -379,7 +379,7 @@ function finishAddProduct() {
                 <div style="background-color:#fff">
                 <center><h1>เพิ่มเสร็จสิ้น</h1></center>
                 </div>
-                <div class="container-modle" style="background-color:#f1f1f1">
+                <div class="container-modal" style="background-color:#f1f1f1">
                 <button onclick="document.getElementById('finishbtn').style.display='none'">ตกลง</button>
                 </div>
                 </div>
@@ -446,16 +446,16 @@ function deleteProduct(funcControDelete) {
 
         const pupUpDeelete = `
                 <div id="finishbtn" class="modal">
-                 <div class="container-modle modal-content animate" >
+                 <form class="container-modal modal-content animate" >
                   <div style="background-color:#fff">
                    <center><h1 style="color: #b50202;" >คุณแน่ใจว่าจะลบข้อมูลนี้ ใช่หรือไม่</h1></center>
                   
-                  <div class="container-modle" style="background-color:#f1f1f1">
+                   <div class="container-modal style="background-color:#f1f1f1"" >
                    <button id="yesbtn" onclick="deletData(${funcControDelete})">ใช่</button>
                    <button id="nobtn" onclick="notDeletData(${funcControDelete})">ไม่</button>
-                   </div>
+                   <div/ >
                 </div>
-                 </div>
+                 </form>
                 </div>`
         document.getElementById("detailProduct").innerHTML = pupUpDeelete;
 

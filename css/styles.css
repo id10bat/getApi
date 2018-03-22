@@ -147,17 +147,15 @@ button:hover {
     background-color: #006d31;
 }
 
-#yesbtn{
+ #yesbtn{
     padding: 16px 18px;
     width: 40%;
     float: right;
     background-color: #6d1900;
 }
 
-#nobtn{
-    padding: 13px 0px;
+ #nobtn{
     width: 40%;
-    float: left;
     background-color: #006d31;
 }
 
@@ -173,7 +171,7 @@ button:hover {
 
 
 
-.container-modle {
+.container-modal {
     padding: 16px;
 }
 
@@ -249,4 +247,20 @@ button:hover {
     display: -ms-inline-flexbox;
     display: inline-flex;
     vertical-align: middle;
+}
+
+
+
+#myInputSearchData {
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('https://www.w3schools.com/howto/searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 }

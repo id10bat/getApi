@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tung Ton</title>
-
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script>
     <style>
@@ -78,7 +79,7 @@
         }
     </style>
     <link rel="stylesheet" href="css/styles.css">
-   
+
 </head>
 
 <body>
@@ -89,8 +90,11 @@
         <div class="size-form">
             <div class="search-example">
                 <div>
-                    <input type="text" id="myInputSearchData" onkeyup="searchData()" placeholder="Search Product Bar Code.." title="Type in a name">
+                    <input name="search" type="text" id="myInputSearchData" onkeyup="searchData()" placeholder="Search Product Bar Code.." title="Type in a name">
+                
                     <button id="addProduct" onclick="addProduct()">เพิ่มสินค้า</button>
+                
+                    
                     <div class="table-example">
                         <table id="item">
                         </table>
